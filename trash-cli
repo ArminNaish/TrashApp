@@ -17,4 +17,4 @@ if [ -z ${PYTHONIOENCODING+x} ]; then export PYTHONIOENCODING=utf8; fi
 export PYTHONPATH="${DIR}:${PYTHONPATH}"
 
 # Run the app with passed arguments
-python -m trash.main "$@"
+python3 -m trash.main "$@"
