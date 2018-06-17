@@ -14,6 +14,12 @@ import locale
 Event = namedtuple('Event', 'start description')
 locale.setlocale(locale.LC_ALL, '')
 
+# todo: 
+# rebuild config like this: https://github.com/dbcli/mssql-cli/blob/master/mssqlcli/config.py
+# make a proper setup file to be installable by pip3
+# checkout mssqlcli to make an execute file python -m foobar
+
+
 def main():
     """ A tool to show the dates of garbage pickups """
     with NamedTemporaryFile() as temp:

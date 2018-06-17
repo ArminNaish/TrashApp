@@ -1,0 +1,20 @@
+#!/bin/bash
+
+# Gets the path of the currently executing script
+# if called by a symlink, the file is resolve unit it is no longer a symlink  
+SOURCE="${BASH_SOURCE[0]}"
+while [ -h "$SOURCE" ]; do # resolve $SOURCE until the file is no longer a symlink
+  DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
+  SOURCE="$(readlink "$SOURCE")"
+  [[ $SOURCE != /* ]] && SOURCE="$DIR/$SOURCE" # if $SOURCE was a relative symlink, we need to resolve it relative to the path where the symlink file was located
+done
+DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
+
+# Sets the default encoding of python input/output encoding to UTF-8 if not set.
+if [ -z ${PYTHONIOENCODING+x} ]; then export PYTHONIOENCODING=utf8; fi
+
+# Adds the path of the currently executing script as default search path for module files
+export PYTHONPATH="${DIR}:${PYTHONPATH}"
+
+# Run the app with passed arguments
+python -m trash.main "$@"
