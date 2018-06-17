@@ -7,46 +7,22 @@ from icalendar import vDatetime
 from itertools import groupby
 from collections import namedtuple
 from datetime import datetime
-import yaml
-import os.path
 import locale
+
+from trash.config import get_config
 
 Event = namedtuple('Event', 'start description')
 locale.setlocale(locale.LC_ALL, '')
 
-# todo: 
-# rebuild config like this: https://github.com/dbcli/mssql-cli/blob/master/mssqlcli/config.py
-# make a proper setup file to be installable by pip3
-# checkout mssqlcli to make an execute file python -m foobar
-
-
 def main():
     """ A tool to show the dates of garbage pickups """
     with NamedTemporaryFile() as temp:
-        cfg = load_config()
-        url = cfg['ical-source']
+        config = get_config()
+        url = config['main']['ical_source']
         download(url, temp.name)
         events = read_events(temp.name)
         for start, summary in group_by_date(events):
             print('{}: {}'.format(start.strftime("%a %d.%m.%Y"), summary))
-
-
-def load_config():
-    """ Load config file using a multi-step  
-        search for the configuration file
-    """
-    curdir = os.curdir
-    home = os.path.expanduser("~")
-    home_proj = os.path.join(os.path.expanduser("~"), '.trash')
-    etc_proj = "/etc/trash"
-    cfg = None
-    for cfg_path in curdir, home, home_proj, etc_proj:
-        try:
-            with open(os.path.join(cfg_path, "config.yml"), 'r') as yml_file:
-                cfg = yaml.load(yml_file)
-        except IOError:
-            pass
-    return cfg
 
 
 def download(url, file_name):

@@ -22,7 +22,8 @@ setup(
         # "pylint==1.9.2",
         "python-dateutil==2.7.3",
         "pytz==2018.4",
-        "PyYAML==3.12",
+        #"PyYAML==3.12",
+        "configobj==5.0.6"
         "requests==2.18.4",
         "rope==0.10.7",
         "six==1.11.0",
