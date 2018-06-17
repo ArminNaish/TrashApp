@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/zsh
 
 # Gets the path of the currently executing script
 # if called by a symlink, the file is resolve unit it is no longer a symlink  
