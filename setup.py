@@ -7,6 +7,8 @@ setup(
     author='trashman',
     author_email='trashman@foo.com',
     packages=['trash'],
+    package_data={'mssqlcli': ['trashrc']},
+    include_package_data=True,
     scripts=['trash-cli'], # when we install the package, setuptools will copy the script to our PATH and make it available for general use.
     install_requires=[
         "astroid==1.6.5",
