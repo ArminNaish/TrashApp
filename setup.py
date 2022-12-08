@@ -13,7 +13,7 @@ setup(
     install_requires=[
         "astroid==1.6.5",
         # "autopep8==1.3.5",
-        "certifi==2018.4.16",
+        "certifi==2022.12.7",
         "chardet==3.0.4",
         "icalendar==4.0.1",
         "idna==2.6",
